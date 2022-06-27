@@ -1,11 +1,13 @@
 from game import Game
+from scoreboard import Scoreboard
 from user_interface.cli_ui import Cli
 
 
 def main() -> None:
     ui = Cli()
-    user_name = ui.read_user_name()
-    game = Game(ui, user_name)
+    scoreboard = Scoreboard()
+    player_name = ui.read_user_name()
+    game = Game(ui=ui, scoreboard=scoreboard, player_name=player_name)
     game.play()
 
 

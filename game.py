@@ -1,15 +1,16 @@
+from dataclasses import dataclass
+
+from rules import get_winner
 from scoreboard import Scoreboard
-from rules import RULES, get_winner
 from user_interface.ui import UI
 
 
+@dataclass
 class Game:
-    def __init__(self, ui: UI, user: str) -> None:
-        self.ui = ui
-        self.scoreboard = Scoreboard()
-        self.rules = RULES
-        self.player_name: str = user
-        self.cpu_name: str = "cpu"
+    player_name: str
+    scoreboard: Scoreboard
+    ui: UI
+    cpu_name: str = "cpu"
 
     def _do_turn(self) -> None:
         user_entity = self.ui.pick_player_entity()
