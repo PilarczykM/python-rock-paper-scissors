@@ -4,7 +4,6 @@ from user_interface.ui import UI
 class Scoreboard:
     """Scoreboard class to register player, track points
     """
-
     def __init__(self):
         self.points: dict[str, int] = {}
 
