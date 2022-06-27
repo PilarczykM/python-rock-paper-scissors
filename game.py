@@ -8,16 +8,8 @@ class Game:
     """Game class
     """
 
-    def __init__(self, user: str, max_round: int = 5) -> None:
-        print("Rock paper scissor spock and lizard...\n Welcome to the game.")
-        print("Rules are simple...")
-        print(
-            "Scissors decapitate Lizard, Scissors cuts paper, paper covers rock, rock crushes lizard, lizard poisons "
-            "Spock, Spock smashes scissors, scissors decapitates lizard, lizard eats paper, paper disproves Spock, "
-            "Spock vaporizes rock, and as it always has, rock crushes scissors.")
-        print("To begin press [Enter]")
-        _ = input()
-
+    def __init__(self, ui: UI, user: str, max_round: int = 5) -> None:
+        self.ui = ui
         self.scoreboard = Scoreboard()
         self.max_round = max_round
         self.entities = Entity
