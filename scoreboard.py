@@ -1,5 +1,4 @@
-from collections import defaultdict
-from typing import Dict
+from user_interface.ui import UI
 
 
 class Scoreboard:
@@ -7,7 +6,13 @@ class Scoreboard:
     """
 
     def __init__(self):
-        self.points: Dict[str, int] = defaultdict(int)
+        self.points: dict[str, int] = {}
 
-    def register_player(self, user_name: str) -> None:
-        self.points[user_name] = 0
+    def register_player(self, player_name: str) -> None:
+        self.points[player_name] = 0
+
+    def win_round(self, player_name: str) -> None:
+        self.points[player_name] += 1
+
+    def to_display(self, ui: UI) -> None:
+        ui.display_score(self.points)
