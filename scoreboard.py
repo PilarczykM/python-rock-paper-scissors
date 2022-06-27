@@ -3,7 +3,7 @@ from typing import Dict
 
 
 class Scoreboard:
-    """Scoreboard class to register player, track points and display the card
+    """Scoreboard class to register player, track points
     """
 
     def __init__(self):
