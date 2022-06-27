@@ -4,42 +4,36 @@ from user_interface.ui import UI
 
 
 class Game:
-    """Game class
-    """
-
-    def __init__(self, ui: UI, user: str, max_round: int = 5) -> None:
+    def __init__(self, ui: UI, user: str) -> None:
         self.ui = ui
         self.scoreboard = Scoreboard()
-        self.max_round = max_round
         self.rules = RULES
-        self.user: str = user
-        self.cpu: str = "cpu"
-
-        # register players in scoreboard
-        self.scoreboard.register_player(self.user)
-        self.scoreboard.register_player(self.cpu)
+        self.player_name: str = user
+        self.cpu_name: str = "cpu"
 
     def _do_turn(self) -> None:
-        """Function to continue the rounds
-        """
         user_entity = self.ui.pick_player_entity()
         cpu_entity = self.ui.pick_cpu_entity()
 
-        self.ui.display_current_round(self.user, self.cpu, user_entity, cpu_entity)
-        if cpu_entity == user_entity:
-            self.ui.display_tie()
-            return
+        self.ui.display_current_round(self.player_name, self.cpu_name, user_entity, cpu_entity)
 
         winner, message = get_winner(user_entity, cpu_entity)
-        if winner == user_entity:
-            self.ui.display_round_winner(self.user, user_entity, message)
-            self.scoreboard.points[self.user] += 1
+        if not winner:
+            self.ui.display_tie()
+        elif winner == user_entity:
+            self.ui.display_round_winner(self.player_name, user_entity, message)
+            self.scoreboard.points[self.player_name] += 1
         else:
-            self.ui.display_round_winner(self.cpu, cpu_entity, message)
-            self.scoreboard.points[self.cpu] += 1
+            self.ui.display_round_winner(self.cpu_name, cpu_entity, message)
+            self.scoreboard.points[self.cpu_name] += 1
 
-    def play(self):
+    def play(self, max_round: int = 5):
+        # register players
+        self.scoreboard.register_player(self.player_name)
+        self.scoreboard.register_player(self.cpu_name)
+
+        # display game rules
         self.ui.display_rules()
-        for _ in range(self.max_round):
+        for _ in range(max_round):
             self._do_turn()
             self.ui.display_score(self.scoreboard.points)
