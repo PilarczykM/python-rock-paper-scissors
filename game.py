@@ -23,10 +23,10 @@ class Game:
             self.ui.display_tie()
         elif winner == user_entity:
             self.ui.display_round_winner(self.player_name, user_entity, message)
-            self.scoreboard.points[self.player_name] += 1
+            self.scoreboard.win_round(self.player_name)
         else:
             self.ui.display_round_winner(self.cpu_name, cpu_entity, message)
-            self.scoreboard.points[self.cpu_name] += 1
+            self.scoreboard.win_round(self.cpu_name)
 
     def play(self, max_round: int = 5):
         # register players
