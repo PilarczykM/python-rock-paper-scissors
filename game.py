@@ -19,7 +19,7 @@ class Game:
         self.scoreboard.register_player(self.user)
         self.scoreboard.register_player(self.cpu)
 
-    def do_turn(self) -> None:
+    def _do_turn(self) -> None:
         """Function to continue the rounds
         """
         user_entity = self.ui.pick_player_entity()
@@ -41,5 +41,5 @@ class Game:
     def play(self):
         self.ui.display_rules()
         for i in range(self.max_round):
-            self.do_turn()
+            self._do_turn()
             self.ui.display_score(self.scoreboard.points)
