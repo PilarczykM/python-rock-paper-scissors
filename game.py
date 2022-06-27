@@ -37,4 +37,4 @@ class Game:
         self.ui.display_rules()
         for _ in range(max_round):
             self._do_turn()
-            self.ui.display_score(self.scoreboard.points)
+            self.scoreboard.to_display(self.ui)
