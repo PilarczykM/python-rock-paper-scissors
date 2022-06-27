@@ -1,3 +1,5 @@
+from typing import Optional
+
 from entity import Entity
 
 RULES: dict[tuple[Entity, Entity], str] = {
@@ -14,7 +16,7 @@ RULES: dict[tuple[Entity, Entity], str] = {
 }
 
 
-def get_winner(entity1: Entity, entity2: Entity) -> tuple[Entity, str]:
+def get_winner(entity1: Entity, entity2: Entity) -> tuple[Optional[Entity], str]:
     """A function to find the winner between two entities and reason for win
             Args:
                 entity1 (Entity): First entity
@@ -25,7 +27,9 @@ def get_winner(entity1: Entity, entity2: Entity) -> tuple[Entity, str]:
                 Entity: Winner of entity1 and entity2
                 str: Reason for win
     """
-    if (entity1, entity2) in RULES:
+    if entity1 == entity2:
+        return None, "It's a tie"
+    elif (entity1, entity2) in RULES:
         return (
            entity1,
            f"{entity1.name} {RULES[(entity1, entity2)]} {entity2.name}"
