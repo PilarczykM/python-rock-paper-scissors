@@ -12,7 +12,7 @@ class Scoreboard:
     def register_player(self, user_name: str) -> None:
         self.points[user_name] = 0
 
-    def display_score(self):
+    def display_scores(self):
         print("Scoreboard:")
         print("======================================")
         for user, score in self.points.items():
