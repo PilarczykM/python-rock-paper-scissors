@@ -1,7 +1,6 @@
-import random
 from scoreboard import Scoreboard
 from rules import Rules
-from entity import Entity
+from user_interface.ui import UI
 
 
 class Game:
@@ -12,7 +11,6 @@ class Game:
         self.ui = ui
         self.scoreboard = Scoreboard()
         self.max_round = max_round
-        self.entities = Entity
         self.rules = Rules()
         self.user: str = user
         self.cpu: str = "cpu"
@@ -37,7 +35,7 @@ class Game:
             self.ui.display_round_winner(self.user, user_entity, message)
             self.scoreboard.points[self.user] += 1
         else:
-            self.display_round_winner(self.cpu, cpu_entity, message)
+            self.ui.display_round_winner(self.cpu, cpu_entity, message)
             self.scoreboard.points[self.cpu] += 1
 
     def play(self):
