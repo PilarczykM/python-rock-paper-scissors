@@ -5,31 +5,28 @@ from user_interface.ui import UI
 
 
 def _entities_str() -> str:
-    """Return the user choices
-    """
-    return ", ".join(f"({entity.value} for {entity.name})" for entity in Entity)
+    return ", ".join(
+        f"({index + 1} for {entity})" for index, entity in enumerate(Entity)
+    )
 
 
 class Cli(UI):
     @staticmethod
     def pick_player_entity() -> Entity:
-        available_choices = [entity.value for entity in Entity]
         while True:
             try:
                 print(f"Select {_entities_str()}:", end='\t')
                 choice = int(input())
 
-                if choice not in available_choices:
-                    print("Please select from available choices")
-                else:
-                    return Entity(choice)
+                if 0 < choice < len(Entity) + 1:
+                    return list(Entity)[choice - 1]
+                print("Please select from available choices")
             except ValueError:
                 print("You entered something other than a number")
 
     @staticmethod
     def pick_cpu_entity() -> Entity:
-        cpu_choice = random.randint(1, len(Entity))
-        return Entity(cpu_choice)
+        return random.choice(list(Entity))
 
     @staticmethod
     def display_rules() -> None:
@@ -44,7 +41,7 @@ class Cli(UI):
 
     @staticmethod
     def display_current_round(player_name: str, cpu_name: str, player_entity: Entity, cpu_entity: Entity) -> None:
-        print(f"{player_name} ({player_entity.name}) x {cpu_name} ({cpu_entity.name})")
+        print(f"{player_name} ({player_entity}) x {cpu_name} ({cpu_entity})")
         print("....")
 
     @staticmethod
@@ -53,7 +50,7 @@ class Cli(UI):
 
     @staticmethod
     def display_round_winner(winner_name: str, winner_entity: Entity, message) -> None:
-        print(f"{winner_name} ({winner_entity.name}) wins the round as {message}")
+        print(f"{winner_name} ({winner_entity}) wins the round as {message}")
 
     @staticmethod
     def display_score(scores: dict[str, int]) -> None:
