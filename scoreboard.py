@@ -1,7 +1,3 @@
-from collections import defaultdict
-from typing import Dict
-
-
 class Scoreboard:
     """Scoreboard class to register player, track points
     """
