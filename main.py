@@ -1,11 +1,13 @@
 from game import Game
+from user_interface.cli_ui import Cli
 
 
 def main() -> None:
     """Main function to start the game
     """
-    user_name = Game.get_user_name()
-    game = Game(user_name)
+    ui = Cli()
+    user_name = ui.read_user_name()
+    game = Game(ui, user_name)
     game.play()
 
 
